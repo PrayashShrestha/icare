@@ -1,0 +1,13 @@
+.message {
+  position: fixed;
+  height: auto;
+  width: 100%;
+  bottom: 2%;
+  margin-left: 95%;
+  font-size: 40px;
+  color: #4880f2;
+}
+.message:hover {
+  color: green;
+  cursor: pointer;
+}

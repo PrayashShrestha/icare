@@ -1,0 +1,40 @@
+.steps {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 4% 0%;
+  background-color: rgb(188, 225, 226);
+}
+.steps__col1 {
+  display: grid;
+  place-items: center;
+}
+.steps__list > li {
+  list-style: none;
+  margin-top: 20px;
+  font-size: 18px;
+}
+.steps__list > li > span {
+  font-size: 20px;
+  font-weight: 550;
+}
+.steps__col2 {
+  padding-right: 15%;
+}
+.col2__div1 {
+  font-size: 35px;
+  font-weight: 600;
+}
+.col2__div1 > i {
+  color: chocolate;
+}
+.col2__div2 {
+  margin-top: 30px;
+  margin-left: 70px;
+  font-size: 25px;
+  font-weight: 550;
+}
+.col2__div3 {
+  margin-top: 30px;
+  text-align: center;
+}

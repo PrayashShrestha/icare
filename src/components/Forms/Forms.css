@@ -1,0 +1,59 @@
+.forms {
+  text-align: center;
+  margin: auto;
+  margin-top: 7%;
+}
+.forms__btns {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+.forms__btns > div {
+  margin-right: 40px;
+}
+.login {
+  border: 1px solid rgba(119, 119, 119, 0.4);
+  width: 450px;
+  height: max-content;
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: 40px;
+  padding: 2% 4%;
+  background: rgba(169, 169, 169, 0.2);
+  box-shadow: -1px 1px 5px 1px black;
+  align-items: center;
+  transition: box-shadow 0.4s;
+}
+.login:hover {
+  box-shadow: -2px 1px 8px 3px black;
+}
+.login__head {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(33, 89, 33);
+}
+.login__fields {
+  margin: auto;
+}
+.login__field {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin-top: 15px;
+}
+.login__field > input {
+  height: 30px;
+  width: 200px;
+  overflow: hidden;
+  outline: none;
+  padding: 10px;
+}
+
+.login__btn {
+  margin-top: 15px;
+}
+.login__small {
+  margin-top: 10px;
+}

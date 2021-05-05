@@ -1,0 +1,22 @@
+.base {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  background-color: rgb(240, 216, 184);
+  padding: 20px 12%;
+}
+.base__quote {
+  align-self: center;
+  margin-left: auto;
+  font-size: 23px;
+  font-weight: 550;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.base__quote > span > img {
+  max-height: 70px;
+  width: auto;
+}
+.base__steps {
+  display: grid;
+  place-items: center;
+}

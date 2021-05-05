@@ -1,0 +1,24 @@
+.predict {
+  background-color: bisque;
+}
+.predict__form {
+  place-items: center;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 20px !important;
+  padding: 3% 0px;
+}
+.predict__mssg {
+  margin-top: 4%;
+  text-align: center;
+  font-size: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: cadetblue;
+}
+.predict__btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px !important;
+}
