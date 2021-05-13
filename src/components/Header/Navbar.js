@@ -1,6 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -40,8 +40,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav__item-btn">
-          <Link to="/forms">
-            <Button>Login</Button>
+          <Link
+            to="/signin"
+            style={{ textDecoration: "none", color: "rgb(202, 197, 192)" }}
+          >
+            Signin
           </Link>
         </li>
       </ul>
@@ -49,4 +52,7 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = () => ({});
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

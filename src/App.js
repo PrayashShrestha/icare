@@ -7,34 +7,37 @@ import Predict from "./pages/Predict";
 import About from "./components/About/About";
 import Consult from "./components/Consult/Consult";
 import Contact from "./components/Contact/Contact";
-import store from "./store";
+import store, { rrfProps } from "./store";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MessageIcon from "./components/MessageIcon/MessageIcon";
-import Forms from "./components/Forms/Forms";
-import Login from "./components/Forms/Login";
 import Signup from "./components/Forms/Signup";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { useEffect, useState } from "react";
+import { auth } from "./Firebase";
+import Signin from "./components/Forms/Signin";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <Router>
-          <Navbar />
-          <Section />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/predict" component={Predict} />
-            <Route path="/about" component={About}></Route>
-            <Route path="/consult" component={Consult}></Route>
-            <Route path="/contact" component={Contact}></Route>
-            <Route path="/forms" component={Forms}></Route>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        </Router>
-        <MessageIcon />
-      </div>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <div className="app">
+          <Router>
+            <Navbar />
+            <Section />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/predict" component={Predict} />
+              <Route path="/about" component={About} />
+              <Route path="/consult" component={Consult} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/signin" component={Signin} />
+              <Route path="/signup" component={Signup} />
+            </Switch>
+          </Router>
+          <MessageIcon />
+        </div>
+      </ReactReduxFirebaseProvider>
     </Provider>
   );
 }

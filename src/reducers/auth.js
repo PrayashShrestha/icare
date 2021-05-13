@@ -1,7 +1,20 @@
-import React from "react";
+import { SIGN_IN } from "../actions/actionTypes";
 
-const auth = () => {
-  return <div></div>;
+const initialState = {
+  user: "",
 };
 
-export default auth;
+const authReducers = (state = initialState, action) => {
+  switch (action.type) {
+    case SIGN_IN: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export default authReducers;

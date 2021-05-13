@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import firebaseConfig from "../../Firebase";
+import { useHistory } from "react-router-dom";
+import { auth } from "../../Firebase";
 import Button from "../Button/Button";
+import "./Forms.css";
 
-const Signup = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+const Signup = ({ signup }) => {
+  const [error, setError] = useState("");
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = e.target.elements;
+
+    const { name, email, password, conformPassword } = e.target.elements;
+
+    if (password.value !== conformPassword.value) {
+      return setError("Passwords didnot match");
+    }
 
     try {
-      firebaseConfig
-        .auth()
-        .createUserWithEmailAndPassword(email.value, password.value);
-      setCurrentUser(true);
+      auth.createUserWithEmailAndPassword(email.value, password.value);
+      history.push("/login");
       alert("Success");
     } catch (error) {
       alert(error);
@@ -22,32 +28,39 @@ const Signup = () => {
   return (
     <form className="login" onSubmit={handleSubmit}>
       <div className="login__head">Signup Form</div>
+      {error && <div className="login__error">{error}</div>}
       <div className="login__fields">
+        <div className="login__field">
+          <label>Name:</label>
+          <input type="text" name="name" id="name"></input>
+        </div>
         <div className="login__field">
           <label>Email:</label>
           <input
             type="text"
             placeholder="example@gmail.com"
             name="email"
+            id="email"
           ></input>
         </div>
-        <div className="login__field">
-          <label>Phone:</label>
-          <input type="number" name="phone"></input>
-        </div>
+
         <div className="login__field">
           <label>Password:</label>
-          <input type="text" name="password"></input>
+          <input type="text" name="password" id="password"></input>
         </div>
         <div className="login__field">
           <label>Confirm Password:</label>
-          <input type="text" name="conformPassword"></input>
+          <input
+            type="text"
+            name="conformPassword"
+            id="conformPassword"
+          ></input>
         </div>
         <div className="login__btn">
           <Button type="submit">Signup</Button>
         </div>
         <div className="login__small">
-          Already a member? <Link to="/login">login</Link>{" "}
+          Already a member? <a href="/login">Login</a>
         </div>
       </div>
     </form>

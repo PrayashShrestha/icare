@@ -5,7 +5,7 @@ import "./Steps.css";
 
 const Steps = ({ steps }) => {
   return (
-    <div className="steps">
+    <div className="steps" id="steps">
       <div className="steps__col1">
         <h1>Check out the Steps:</h1>
         <ul className="steps__list">

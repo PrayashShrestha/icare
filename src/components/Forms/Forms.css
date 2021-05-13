@@ -1,4 +1,4 @@
-.forms {
+/* .forms {
   text-align: center;
   margin: auto;
   margin-top: 7%;
@@ -12,7 +12,7 @@
 }
 .forms__btns > div {
   margin-right: 40px;
-}
+} */
 .login {
   border: 1px solid rgba(119, 119, 119, 0.4);
   width: 450px;
@@ -34,6 +34,12 @@
   font-size: 30px;
   font-weight: 600;
   color: rgb(33, 89, 33);
+}
+.login__error {
+  text-align: center;
+  padding: 5px;
+  color: red;
+  font-weight: 600;
 }
 .login__fields {
   margin: auto;

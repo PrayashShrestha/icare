@@ -6,7 +6,7 @@ const Button = ({ children, onclick, type }) => {
     <div className="btn__div">
       <button
         className="btns"
-        onClick={onclick ? `${onclick}` : "null"}
+        onClick={onclick}
         type={type ? `${type}` : "null"}
       >
         {children}

@@ -44,7 +44,6 @@
   display: flex;
   list-style: none;
   justify-content: space-around;
-
   color: aliceblue;
   font-size: 20px;
   font-weight: 520;
@@ -53,8 +52,9 @@
   margin-left: 30%;
 }
 .nav__item {
-  padding-bottom: 2px;
   cursor: pointer;
+  border: none;
+  min-height: 27px;
 }
 .nav__item:hover {
   border-bottom: 3px solid rgb(248, 247, 248);
@@ -62,5 +62,5 @@
 }
 .nav__item-btn {
   border: none;
-  box-shadow: 0px 0px 2px 1px gray;
+  color: rgb(202, 197, 192);
 }

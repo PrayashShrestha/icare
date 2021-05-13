@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Predict.css";
 import Fields from "../components/Fields/Fields";
 
@@ -15,6 +15,8 @@ const Predict = () => {
     { title: "Normal Nucleoli", range: "0-10" },
     { title: "Mitoses", range: "0-10" },
   ];
+
+  const [result, setResult] = useState("result displayed here");
   return (
     <div className="predict">
       <div className="predict__mssg">
@@ -24,10 +26,10 @@ const Predict = () => {
 
       {/* <Prompt /> */}
       <div className="predict__form">
-        {fields.map((field) => (
-          <Fields field={field} />
+        {fields.map((field, id) => (
+          <Fields field={field} key={id} />
         ))}
-        <div></div>
+        <div>{result}</div>
         <div className="predict__btns">
           <Button>Reset All</Button>
           <Button>Predict</Button>
