@@ -7,29 +7,67 @@ import "./Navbar.css";
 const Navbar = () => {
   const history = useHistory();
   const [logged, setLogged] = useState("");
-  const [mobileMenu, setMobileMenu] = useState(false);
+  const [click, setClick] = useState(false);
   const [menuButton, setMenuButton] = useState(false);
+
+  const user = useSelector((state) => state.user.user);
+
+  //Menu Button Setting with resize
   const showButton = () => {
-    if (window.innerWidth <= 960) {
+    if (window.innerWidth <= 768) {
       setMenuButton(true);
     } else {
       setMenuButton(false);
     }
   };
 
-  const user = useSelector((state) => state.user.user);
+  //function to make change in cross and bars
+  const menuClick = () => {
+    setClick(!click);
+  };
+
+  //function to close the nav if any item is clicked
+  const closeNav = () => {
+    setClick(false);
+  };
+
+  //useEffect hook for setting user
   useEffect(() => {
-    console.log(user);
     setLogged(user);
   }, [user]);
+
+  //calliing show button  function whenever the screen is resized
+  useEffect(() => {
+    showButton();
+  }, []);
+
+  //adding the event listener for window resize and calling the function
+  window.addEventListener("resize", showButton);
+
   return (
-    <div className="navbar">
+    <nav className="navbar" className={click ? "navbar active" : "navbar "}>
       <span className="nav__number">
         Hotline: <span>+977-98438151</span>
       </span>
-      <ul className="nav__items">
+
+      {/* vary the menu and cross button */}
+      {menuButton && (
+        <div className="menuIcon">
+          <i
+            onClick={menuClick}
+            className={click ? "fas fa-times cross" : "fas fa-bars menu"}
+          ></i>
+        </div>
+      )}
+
+      {/* nav-Items */}
+      <ul className={click ? "nav__items active" : "nav__items "}>
         <li className="nav__item">
-          <Link to="/" style={{ textDecoration: "none", color: "aliceblue" }}>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "aliceblue" }}
+            onClick={closeNav}
+          >
             Home
           </Link>
         </li>
@@ -37,6 +75,7 @@ const Navbar = () => {
           <Link
             to="/about"
             style={{ textDecoration: "none", color: "aliceblue" }}
+            onClick={closeNav}
           >
             About I-care
           </Link>
@@ -45,6 +84,7 @@ const Navbar = () => {
           <Link
             to="/consult"
             style={{ textDecoration: "none", color: "aliceblue" }}
+            onClick={closeNav}
           >
             Consult Doctor
           </Link>
@@ -53,11 +93,12 @@ const Navbar = () => {
           <Link
             to="/contact"
             style={{ textDecoration: "none", color: "aliceblue" }}
+            onClick={closeNav}
           >
             Contact
           </Link>
         </li>
-        <li className="nav__item-btn">
+        <li className="nav__item">
           {logged ? (
             <button
               onClick={() => {
@@ -65,6 +106,7 @@ const Navbar = () => {
                 setLogged("");
                 history.go(0); //reload the page
               }}
+              onClick={closeNav}
             >
               {logged}
             </button>
@@ -72,13 +114,14 @@ const Navbar = () => {
             <Link
               to="/signin"
               style={{ textDecoration: "none", color: "rgb(202, 197, 192)" }}
+              onClick={closeNav}
             >
               Signin
             </Link>
           )}
         </li>
       </ul>
-    </div>
+    </nav>
   );
 };
 

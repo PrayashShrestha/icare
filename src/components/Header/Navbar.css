@@ -1,20 +1,21 @@
 .navbar {
+  position: sticky;
   display: flex;
   /* grid-template-columns: 1fr 3fr;
   grid-template-rows: 1fr; */
   align-items: center;
-  width: 100vw;
-  height: max-content;
+  width: 100%;
+  height: 50px;
   background-color: #008080;
   top: 0%;
-  position: -webkit-sticky;
-  position: sticky !important;
   justify-content: space-between;
+  z-index: 99;
 }
 .nav__number {
   display: flex;
   margin-left: 70px;
   animation: colors 2s infinite;
+  flex-wrap: nowrap;
 }
 @keyframes colors {
   0% {
@@ -41,8 +42,12 @@
 .nav__number > span:hover {
   border-bottom: 1px solid #fff;
 }
+.menuIcon {
+  display: none;
+}
 
 .nav__items {
+  position: relative;
   display: flex;
   width: 70%;
   list-style: none;
@@ -84,8 +89,50 @@
   .navbar {
     display: flex;
     height: 40px;
+    width: 100vw;
+    position: sticky;
   }
+  .nav__number {
+    margin-left: 50px;
+  }
+  .menuIcon {
+    display: block;
+    margin-right: 40px;
+    margin-top: 8px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: ease-out 0.4s;
+  }
+  .menu {
+    color: rgb(169, 169, 169);
+  }
+  .cross {
+    color: rgb(196, 43, 43);
+  }
+
   .nav__items {
-    display: none;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    left: -100%; /*  this is used to hide */
+    background-color: #075454;
+
+    top: 40px;
+    z-index: 9999;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .nav__items.active {
+    left: 0;
+  }
+  .nav__item {
+    padding: 10px;
+  }
+  .nav__item:hover {
+    background-color: rgb(69, 121, 109);
+    border: none;
+    border-radius: 20px;
   }
 }
