@@ -105,8 +105,8 @@ const Navbar = () => {
                 auth.signOut();
                 setLogged("");
                 history.go(0); //reload the page
+                setClick(false); //close the nav
               }}
-              onClick={closeNav}
             >
               {logged}
             </button>
