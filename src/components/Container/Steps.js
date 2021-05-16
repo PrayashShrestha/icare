@@ -11,7 +11,7 @@ const Steps = ({ steps }) => {
         <ul className="steps__list">
           {steps.map((step, index) => (
             <li key={index}>
-              <span>Step{index}</span>: {step}
+              <span>Step{index}</span>: <p>{step}</p>
             </li>
           ))}
         </ul>

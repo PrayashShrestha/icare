@@ -1,5 +1,5 @@
-//SIGN-UP
-export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
-export const SIGNUP_ERROR = "SIGNUP_ERROR";
-export const SIGN_UP = "SIGN_UP";
-export const SIGN_IN = "SIGN_IN";
+//SET_USER
+export const SET_USER = "SET_USER";
+
+//SET_ERRORS
+export const SET_ERRORS = "SET_ERRORS";

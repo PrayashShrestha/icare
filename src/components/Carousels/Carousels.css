@@ -72,3 +72,8 @@
 .dot:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+@media only screen and (max-width: 992px) {
+  .all__dots {
+    right: 25%;
+  }
+}

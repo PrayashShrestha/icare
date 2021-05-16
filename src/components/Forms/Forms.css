@@ -63,3 +63,9 @@
 .login__small {
   margin-top: 10px;
 }
+
+@media only screen and (max-width: 992px) {
+  .login {
+    width: 100%;
+  }
+}

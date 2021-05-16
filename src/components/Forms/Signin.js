@@ -3,58 +3,56 @@ import Button from "../Button/Button";
 import firebase from "firebase";
 import { useHistory } from "react-router";
 import "./Forms.css";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { auth } from "../../Firebase";
+import { setErrors, setUser } from "../../actions/Actions";
 
-const Signin = ({ credentials: { authenticate } }) => {
-  const [passVisiable, setPassVisiable] = useState();
-  const [error, setError] = useState("");
+const Signin = (props) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
   const history = useHistory();
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-  const [currentUser, setCurrentUser] = useState();
+  const dispatch = useDispatch();
+  const err = useSelector((state) => state.error.error);
 
-  useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
-      setCurrentUser(userAuth);
-    });
-  }, []);
-  console.log(currentUser);
+  const provider = new firebase.auth.GoogleAuthProvider();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!(emailRef.current.value && passwordRef.current.value)) {
-      return setError("Fields are Empty");
+      return dispatch(setErrors("Fields are empty"));
     }
     try {
-      auth
+      await auth
         .signInWithEmailAndPassword(
           emailRef.current.value,
           passwordRef.current.value
         )
-        .then(() => {
+        .then((result) => {
+          auth.onAuthStateChanged(() => {
+            dispatch(setUser(result.user.displayName));
+          });
+          console.log("called");
           history.push("/");
         })
         .catch((err) => {
-          setError("hello");
           if (err.code === "auth/wrong-password") {
-            return setError("Please verify your input");
+            return dispatch(setErrors("You entered wrong password"));
           }
-          setError("User not found");
+          dispatch(setErrors(err.code));
         });
     } catch {
-      setError("Login failed please try again");
+      dispatch(setErrors("Login failed please try again"));
     }
-    setError("");
+
+    dispatch(setErrors(""));
   };
-  console.log(auth);
 
   return (
     <form className="login" onSubmit={handleSubmit}>
       <div className="login__head">Login Form</div>
-      {error && <div className="login__error">{error}</div>}
+      {err && <div className="login__error">{err}</div>}
       <div className="login__fields">
         <div className="login__field">
           <label>Email:</label>
@@ -85,7 +83,7 @@ const Signin = ({ credentials: { authenticate } }) => {
                 })
                 .catch((err) => {
                   if (!err.a) {
-                    setError("Login failed Please try again");
+                    dispatch(setErrors("Login failed Please try again"));
                   }
                 });
             }}
@@ -97,8 +95,5 @@ const Signin = ({ credentials: { authenticate } }) => {
     </form>
   );
 };
-const mapStateToProps = (state) => ({
-  credentials: state.firebase,
-});
 
-export default connect(mapStateToProps)(Signin);
+export default Signin;

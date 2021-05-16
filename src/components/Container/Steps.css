@@ -2,7 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  padding: 4% 0%;
+  padding: 4% 2%;
   background-color: rgb(188, 225, 226);
 }
 .steps__col1 {
@@ -10,6 +10,7 @@
   place-items: center;
 }
 .steps__list > li {
+  display: flex;
   list-style: none;
   margin-top: 20px;
   font-size: 18px;
@@ -37,4 +38,15 @@
 .col2__div3 {
   margin-top: 30px;
   text-align: center;
+}
+@media only screen and (max-width: 992px) {
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 3px;
+    padding: 7% 2%;
+  }
+  .steps__col2 {
+    margin-top: 20px;
+  }
 }

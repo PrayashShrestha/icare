@@ -20,3 +20,28 @@
   display: grid;
   place-items: center;
 }
+@media only screen and (max-width: 992px) {
+  .base {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+  }
+  .base__quote {
+    font-size: 23px;
+    width: 100%;
+    text-align: center;
+  }
+  .base__steps {
+    margin-top: 20px;
+    margin: 10px 25px;
+  }
+  .base__img {
+    object-fit: scale-down;
+    padding-left: 10px;
+    width: 90%;
+    height: auto;
+  }
+  .base__img > img {
+    width: 100%;
+  }
+}

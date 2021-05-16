@@ -1,13 +1,31 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { connect, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../../Firebase";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const history = useHistory();
+  const [logged, setLogged] = useState("");
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [menuButton, setMenuButton] = useState(false);
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setMenuButton(true);
+    } else {
+      setMenuButton(false);
+    }
+  };
+
+  const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    console.log(user);
+    setLogged(user);
+  }, [user]);
   return (
     <div className="navbar">
       <span className="nav__number">
-        Hotline: <span>+977-9843818951</span>
+        Hotline: <span>+977-98438151</span>
       </span>
       <ul className="nav__items">
         <li className="nav__item">
@@ -40,12 +58,24 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav__item-btn">
-          <Link
-            to="/signin"
-            style={{ textDecoration: "none", color: "rgb(202, 197, 192)" }}
-          >
-            Signin
-          </Link>
+          {logged ? (
+            <button
+              onClick={() => {
+                auth.signOut();
+                setLogged("");
+                history.go(0); //reload the page
+              }}
+            >
+              {logged}
+            </button>
+          ) : (
+            <Link
+              to="/signin"
+              style={{ textDecoration: "none", color: "rgb(202, 197, 192)" }}
+            >
+              Signin
+            </Link>
+          )}
         </li>
       </ul>
     </div>

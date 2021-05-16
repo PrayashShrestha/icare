@@ -9,7 +9,9 @@
   height: max-content;
   border: 1px solid #575151;
   padding: 2% 1%;
-  margin: 2rem 5rem;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   background-color: rgba(209, 197, 181, 0.4);
   box-shadow: -1px 0px 2px 1px black;
   transition: box-shadow 0.5s ease;
@@ -43,4 +45,20 @@
 .consult__btn {
   text-align: center;
   margin-top: 20px;
+}
+
+@media only screen and (max-width: 1500px) {
+  .consult {
+    width: 100%;
+    place-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .consult {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

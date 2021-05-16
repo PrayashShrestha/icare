@@ -1,29 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { setErrors } from "../../actions/Actions";
 import { auth } from "../../Firebase";
 import Button from "../Button/Button";
 import "./Forms.css";
 
 const Signup = ({ signup }) => {
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.error.error);
 
-  const handleSubmit = (e) => {
+  //onFormSubmit function
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { name, email, password, conformPassword } = e.target.elements;
+    const { firstName, lastName, email, password, conformPassword } =
+      e.target.elements;
 
+    //check the datas in the user level
     if (password.value !== conformPassword.value) {
-      return setError("Passwords didnot match");
+      return dispatch(setErrors("Passwords didnot match"));
+    } else if (
+      !(
+        firstName.value &&
+        lastName &&
+        email.value &&
+        password.value &&
+        conformPassword.value
+      )
+    ) {
+      return dispatch(setErrors("Fields are empty"));
     }
 
+    //creating user in firebase
     try {
-      auth.createUserWithEmailAndPassword(email.value, password.value);
-      history.push("/login");
-      alert("Success");
-    } catch (error) {
-      alert(error);
+      await auth
+        .createUserWithEmailAndPassword(email.value, password.value)
+        .then((result) => {
+          result.user.updateProfile({
+            displayName: `${firstName.value} ${lastName.value}`,
+          });
+          alert("success");
+          console.log(result.user);
+          history.push("/signin");
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } catch {
+      alert("Signup Failed");
     }
+
+    dispatch(setErrors(""));
   };
   return (
     <form className="login" onSubmit={handleSubmit}>
@@ -31,8 +61,12 @@ const Signup = ({ signup }) => {
       {error && <div className="login__error">{error}</div>}
       <div className="login__fields">
         <div className="login__field">
-          <label>Name:</label>
-          <input type="text" name="name" id="name"></input>
+          <label>First Name:</label>
+          <input type="text" name="firstName" id="firstName"></input>
+        </div>
+        <div className="login__field">
+          <label>Last Name:</label>
+          <input type="text" name="lastName" id="lastName"></input>
         </div>
         <div className="login__field">
           <label>Email:</label>
@@ -60,7 +94,7 @@ const Signup = ({ signup }) => {
           <Button type="submit">Signup</Button>
         </div>
         <div className="login__small">
-          Already a member? <a href="/login">Login</a>
+          Already a member? <a href="/signin">Login</a>
         </div>
       </div>
     </form>
