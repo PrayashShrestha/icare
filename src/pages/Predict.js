@@ -17,6 +17,19 @@ const Predict = () => {
   ];
 
   const [result, setResult] = useState("result displayed here");
+
+  const [values, setValues] = useState([]);
+
+  const updateValue = (val, index) => {
+    const temp = [...values];
+    temp[index] = val;
+    setValues(temp);
+  };
+
+  const handleReset = () => {
+    setValues([]);
+  };
+
   return (
     <div className="predict">
       <div className="predict__mssg">
@@ -27,11 +40,17 @@ const Predict = () => {
       {/* <Prompt /> */}
       <div className="predict__form">
         {fields.map((field, id) => (
-          <Fields field={field} key={id} />
+          <Fields
+            field={field}
+            key={id}
+            id={id}
+            value={values[id] ? values[id] : ""}
+            updateValue={updateValue}
+          />
         ))}
         <div>{result}</div>
         <div className="predict__btns">
-          <Button>Reset All</Button>
+          <Button onclick={handleReset}>Reset All</Button>
           <Button>Predict</Button>
         </div>
       </div>
