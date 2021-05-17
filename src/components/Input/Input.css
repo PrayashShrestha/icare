@@ -1,2 +1,10 @@
 .inp {
+  padding: 5px;
+  text-align: center;
+  outline: none;
+}
+/* to disble the number arrows */
+input::-webkit-inner-spin-button {
+  opacity: 0;
+  display: none;
 }

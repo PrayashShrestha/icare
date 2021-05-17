@@ -2,13 +2,18 @@ import React from "react";
 import "./Fields.css";
 import Input from "../Input/Input";
 
-const Form = ({ field }) => {
+const Form = ({ field, value, id, updateValue }) => {
   const { title, range } = field;
   return (
-    <form className="form">
-      {title}:
-      <Input placeholder={range} />
-    </form>
+    <div className="form">
+      <span>{title}:</span>
+      <Input
+        placeholder={range}
+        value={value}
+        updateValue={updateValue}
+        id={id}
+      />
+    </div>
   );
 };
 

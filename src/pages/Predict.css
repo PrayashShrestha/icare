@@ -1,5 +1,7 @@
 .predict {
   background-color: bisque;
+  padding-bottom: 50px;
+  padding-top: 20px;
 }
 .predict__form {
   place-items: center;
@@ -17,8 +19,26 @@
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   color: cadetblue;
 }
+.predict__result {
+  border: 1px solid black;
+  padding: 10px;
+  width: 250px;
+  height: 80px;
+  color: #008080;
+  background-color: rgb(199, 199, 199);
+}
+.predict__result > h3 {
+  color: red;
+}
 .predict__btns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px !important;
+}
+
+@media only screen and (max-width: 850px) {
+  .predict__form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

@@ -33,7 +33,6 @@ const Signin = (props) => {
           auth.onAuthStateChanged(() => {
             dispatch(setUser(result.user.displayName));
           });
-          console.log("called");
           history.push("/");
         })
         .catch((err) => {
@@ -78,7 +77,10 @@ const Signin = (props) => {
             onclick={() => {
               auth
                 .signInWithPopup(provider)
-                .then(() => {
+                .then((result) => {
+                  auth.onAuthStateChanged(() => {
+                    dispatch(setUser(result.user.displayName));
+                  });
                   history.push("/");
                 })
                 .catch((err) => {
