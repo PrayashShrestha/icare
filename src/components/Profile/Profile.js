@@ -68,7 +68,7 @@ const Profile = () => {
         )}
         <div className="profile__btns">
           <button onClick={() => history.push("/details")}>
-            {userData ? "Add Details" : "Update Details"}
+            {!userData ? "Add Details" : "Update Details"}
           </button>
         </div>
       </div>
