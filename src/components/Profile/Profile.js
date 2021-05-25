@@ -36,7 +36,7 @@ const Profile = () => {
       <div className="profile__container">
         <h1 className="profile__header">Profile</h1>
         {error && <div>{error}</div>}
-        {userData ? (
+        {!userData ? (
           <div className="profile_notSet">You haven't set Your Profile Yet</div>
         ) : (
           <div className="profile__details">
