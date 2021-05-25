@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import "./App.css";
 import Navbar from "./components/Header/Navbar";
 import Section from "./components/Header/Section";
@@ -13,6 +13,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MessageIcon from "./components/MessageIcon/MessageIcon";
 import Signup from "./components/Forms/Signup";
 import Signin from "./components/Forms/Signin";
+import DetailForm from "./components/Forms/DetailForm";
+import { useEffect } from "react";
+import { auth } from "./Firebase";
+import Profile from "./components/Profile/Profile";
+import Forms from "./components/Forms/Forms";
 
 function App() {
   // useEffect(() => {
@@ -26,24 +31,25 @@ function App() {
   // });
 
   return (
-    <Provider store={store}>
-      <div className="app">
-        <Router>
-          <Navbar />
-          <Section />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/predict" component={Predict} />
-            <Route path="/about" component={About} />
-            <Route path="/consult" component={Consult} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/signin" component={Signin} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        </Router>
-        <MessageIcon />
-      </div>
-    </Provider>
+    <div className="app">
+      <Router>
+        <Navbar />
+        <Section />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/predict" component={Predict} />
+          <Route path="/about" component={About} />
+          <Route path="/consult" component={Consult} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/forms" component={Forms} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/details" component={DetailForm} />
+        </Switch>
+      </Router>
+      <MessageIcon />
+    </div>
   );
 }
 

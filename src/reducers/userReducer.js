@@ -1,14 +1,25 @@
-import { SET_USER } from "../actions/actionTypes";
+import { SET_USER, SET_USER_CATEGORY } from "../actions/actionTypes";
 
 const initialState = {
   user: "",
+  uid: "",
+  email: "",
+  userCategory: "",
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER: {
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        uid: action.payload.uid,
+        email: action.payload.email,
+      };
+    }
+    case SET_USER_CATEGORY: {
+      return {
+        ...state,
+        userCategory: action.payload,
       };
     }
     default:

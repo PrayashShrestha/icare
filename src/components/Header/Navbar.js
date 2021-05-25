@@ -9,6 +9,7 @@ const Navbar = () => {
   const [logged, setLogged] = useState("");
   const [click, setClick] = useState(false);
   const [menuButton, setMenuButton] = useState(false);
+  const [option, handleShowOption] = useState(false);
 
   const user = useSelector((state) => state.user.user);
 
@@ -16,8 +17,10 @@ const Navbar = () => {
   const showButton = () => {
     if (window.innerWidth <= 768) {
       setMenuButton(true);
+      handleShowOption(true);
     } else {
       setMenuButton(false);
+      handleShowOption(false);
     }
   };
 
@@ -98,34 +101,83 @@ const Navbar = () => {
             Contact
           </Link>
         </li>
-        <li className="nav__item">
+        <li className="nav__item-logging">
           {logged ? (
             <button
               onClick={() => {
-                auth.signOut();
-                setLogged("");
-                history.go(0); //reload the page
-                setClick(false); //close the nav
+                handleShowOption(!option);
               }}
             >
               {logged}
             </button>
           ) : (
             <Link
-              to="/signin"
-              style={{ textDecoration: "none", color: "rgb(202, 197, 192)" }}
+              to="/forms"
+              style={{ textDecoration: "none", color: "aliceblue" }}
               onClick={closeNav}
             >
               Signin
             </Link>
           )}
         </li>
+        {/* Only show when user is in mobile view and is logged in */}
+        {logged && option && (
+          <li className="nav__item-mobile">
+            <p
+              onClick={() => {
+                history.push("/profile");
+                closeNav();
+              }}
+            >
+              Profile
+            </p>
+          </li>
+        )}
+        {logged && option && (
+          <li className="nav__item-mobile">
+            <p
+              onClick={() => {
+                auth.signOut();
+                setLogged("");
+                history.push("/");
+                history.go(0); //reload the page
+                setClick(false); //close the nav in mobile view
+              }}
+            >
+              Logout
+            </p>
+          </li>
+        )}
       </ul>
+
+      {/* shows only when the user is logged  and in bigger screen*/}
+      {logged && option && (
+        <div className="navItem__options">
+          {/* after onclick we need to make dissapear the option so we set it back to false
+          but we donot do it in logout coz after logout we have set the options to display none when logged is false */}
+          <p
+            onClick={() => {
+              handleShowOption(false);
+              history.push("/profile");
+            }}
+          >
+            Profile
+          </p>
+          <p
+            onClick={() => {
+              auth.signOut();
+              setLogged("");
+              history.push("/");
+              history.go(0); //reload the page
+              setClick(false); //close the nav in mobile view
+            }}
+          >
+            Logout
+          </p>
+        </div>
+      )}
     </nav>
   );
 };
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default Navbar;

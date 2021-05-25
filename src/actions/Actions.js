@@ -8,11 +8,26 @@ export const setErrors = (error) => ({
 });
 
 //Set the name of the user from the firebase to the UI
-export const setUser = (user) => async (dispatch) =>
+export const setUser = (user, uid, email) => async (dispatch) =>
   dispatch({
     type: types.SET_USER,
-    payload: user,
+    payload: { user: user, uid: uid, email: email },
   });
 auth.onAuthStateChanged((userAuth) => {
   return;
 });
+
+//set the user category before signing in
+export const setUserCategory = (category) => (dispatch) => {
+  dispatch({
+    type: types.SET_USER_CATEGORY,
+    payload: category,
+  });
+};
+
+export const setLoading = (loading) => (dispatch) => {
+  dispatch({
+    type: types.SET_LOADING,
+    payload: loading,
+  });
+};

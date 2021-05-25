@@ -1,19 +1,30 @@
-/* .forms {
+.forms {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 50px;
+}
+.forms__container {
+  width: 20%;
+  height: max-content;
   text-align: center;
-  margin: auto;
-  margin-top: 7%;
+  box-shadow: 1px 0px 8px 2px rgb(216, 215, 215);
+  padding-bottom: 30px;
+}
+.forms__head {
+  font-size: 25px;
+  font-weight: 550;
+  font-family: "Pattaya", sans-serif;
+  margin-top: 30px;
 }
 .forms__btns {
-  width: 100%;
-  margin: auto;
+  margin-top: 20px;
   display: flex;
-  justify-content: center;
-  margin-top: 2%;
+  justify-content: space-around;
+  padding: 0px 20px;
 }
-.forms__btns > div {
-  margin-right: 40px;
-} */
-.login {
+
+.form {
   border: 1px solid rgba(119, 119, 119, 0.4);
   width: 450px;
   height: max-content;
@@ -21,49 +32,72 @@
   margin-top: 1%;
   margin-bottom: 40px;
   padding: 2% 4%;
-  background: rgba(169, 169, 169, 0.2);
-  box-shadow: -1px 1px 5px 1px black;
-  align-items: center;
-  transition: box-shadow 0.4s;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 22px 0 rgba(31, 38, 135, 0.37);
+  border: rgba(255, 255, 255, 0.25);
+  font-family: "Pattaya", sans-serif;
+  display: flex;
+  flex-direction: column;
 }
-.login:hover {
-  box-shadow: -2px 1px 8px 3px black;
-}
-.login__head {
+
+.form__head {
+  width: 100%;
   text-align: center;
   font-size: 30px;
   font-weight: 600;
-  color: rgb(33, 89, 33);
+  color: #000;
 }
-.login__error {
+.form__error {
   text-align: center;
   padding: 5px;
   color: red;
   font-weight: 600;
 }
-.login__fields {
+.form__fields {
   margin: auto;
 }
-.login__field {
+.form__field {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   margin-top: 15px;
 }
-.login__field > input {
+.form__field > input {
   height: 30px;
-  width: 200px;
+  width: 280px;
   overflow: hidden;
   outline: none;
   padding: 10px;
 }
 
-.login__btn {
-  margin-top: 15px;
+.form__btn {
+  width: 100%;
+  margin-top: 25px;
 }
-.login__small {
-  margin-top: 10px;
+.form__btn > button {
+  width: 100%;
+  height: 40px;
+  background-color: #008080;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: 550;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 
+.form__photoBtns {
+  display: grid;
+  margin-top: 10px;
+  place-items: center;
+}
+.form__photoBtns > button {
+  width: 150px;
+}
+.form__small {
+  margin-top: 10px;
+  text-align: center;
+}
 @media only screen and (max-width: 992px) {
   .login {
     width: 100%;

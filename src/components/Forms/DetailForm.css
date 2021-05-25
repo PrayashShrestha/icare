@@ -1,0 +1,143 @@
+.detailForm {
+  width: 500px;
+  display: grid;
+  margin: auto;
+  padding: 2% 4%;
+  margin-bottom: 50px;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 22px 0 rgba(31, 38, 135, 0.37);
+  border: rgba(255, 255, 255, 0.25);
+}
+.detailForm > h3 {
+  font-family: "Pattaya", sans-serif;
+  font-size: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.detailForm__mssg {
+  margin-bottom: 10px;
+  background: rgba(165, 161, 161, 0.25);
+  padding: 5px;
+  color: rgba(225, 32, 32, 5);
+  font-family: "Pattaya", sans-serif;
+}
+.detailForm__item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding-left: 0px;
+}
+.detailForm__item > label {
+  font-size: 18px;
+  font-family: "Pattaya", sans-serif;
+}
+.detailForm__item > input {
+  height: 30px;
+  outline: none;
+  width: 280px;
+  padding: 5px;
+}
+.detailForm__item > select {
+  height: 30px;
+  outline: none;
+  width: 280px;
+  padding: 5px;
+}
+.detailForm__camera {
+  position: absolute;
+  bottom: -53%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.detailForm__popupCamera {
+  position: sticky;
+  border: 1px solid black;
+  height: 530px;
+  width: 400px;
+  padding: 15px;
+  background: rgba(214, 214, 214, 0.9);
+  transition: all 1s ease-in-out;
+  z-index: 999;
+}
+.detailForm__hideCamera {
+  transform: scale(0);
+  z-index: -1;
+  display: none;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+.hideCamera {
+  width: 100%;
+  margin-left: 92%;
+  margin-top: 0px;
+  color: rgb(211, 12, 12);
+  font-size: 40px;
+  cursor: pointer;
+}
+.popupCamera__text {
+  padding: 30px;
+  font-size: 20px;
+  font-family: "Slabo 27px", serif;
+}
+.detailField__webcam {
+  width: 100%;
+  margin-left: 33%;
+}
+.detailForm__photoBtns {
+  display: grid;
+  margin-top: 10px;
+  grid-gap: 10px !important;
+  place-items: center;
+  font-weight: 600;
+}
+.detailForm__photoBtns > button {
+  padding: 3px;
+  font-weight: 600;
+}
+
+.webcam__img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.webcam__img > img {
+  border: 3px solid black;
+  margin-top: 5px;
+}
+.capture__btns {
+  width: 100%;
+  display: flex;
+  margin-top: 10%;
+  justify-content: space-around;
+}
+.webcam__capture {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  border: none;
+  padding: 8px;
+  background: rgba(12, 4, 84, 0.7);
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+.webcam__capture.ok {
+  background: rgba(4, 84, 43, 0.7);
+}
+
+.detailForm__submit {
+  width: 100%;
+}
+.detaiForm__submit > button {
+  width: 100%;
+  height: 40px;
+  background-color: #008080;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: 550;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}

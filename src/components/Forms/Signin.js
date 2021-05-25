@@ -4,8 +4,9 @@ import firebase from "firebase";
 import { useHistory } from "react-router";
 import "./Forms.css";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { auth } from "../../Firebase";
+import { auth, firestore } from "../../Firebase";
 import { setErrors, setUser } from "../../actions/Actions";
+import { isEmpty } from "react-redux-firebase";
 
 const Signin = (props) => {
   const emailRef = useRef(null);
@@ -30,9 +31,11 @@ const Signin = (props) => {
           passwordRef.current.value
         )
         .then((result) => {
-          auth.onAuthStateChanged(() => {
-            dispatch(setUser(result.user.displayName));
-          });
+          console.log(result.user);
+          dispatch(
+            setUser(result.user.displayName, result.user.uid, result.user.email)
+          );
+
           history.push("/");
         })
         .catch((err) => {
@@ -44,16 +47,14 @@ const Signin = (props) => {
     } catch {
       dispatch(setErrors("Login failed please try again"));
     }
-
-    dispatch(setErrors(""));
   };
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
-      <div className="login__head">Login Form</div>
-      {err && <div className="login__error">{err}</div>}
-      <div className="login__fields">
-        <div className="login__field">
+    <form className="form" onSubmit={handleSubmit}>
+      <div className="form__head">Login Form</div>
+      {err && <div className="form__error">{err}</div>}
+      <div className="form__fields">
+        <div className="form__field">
           <label>Email:</label>
           <input
             type="text"
@@ -62,18 +63,20 @@ const Signin = (props) => {
             ref={emailRef}
           ></input>
         </div>
-        <div className="login__field">
+        <div className="form__field">
           <label>Password:</label>
           <input type="password" id="password" ref={passwordRef}></input>
         </div>
-        <div className="login__btn">
-          <Button>Login</Button>
+        <div className="form__btn">
+          <button>Login</button>
         </div>
-        <div className="login__small">
+        <div className="form__small">
           Not a member yet? <a href="/signup">Signup</a>
         </div>
-        <div className="login__btn">
-          <Button
+
+        {/* Google Signin */}
+        <div className="form__btn">
+          <button
             onclick={() => {
               auth
                 .signInWithPopup(provider)
@@ -91,7 +94,7 @@ const Signin = (props) => {
             }}
           >
             Signin with Google
-          </Button>
+          </button>
         </div>
       </div>
     </form>

@@ -44,7 +44,7 @@ const Signup = ({ signup }) => {
           });
           alert("success");
           console.log(result.user);
-          history.push("/signin");
+          history.push("/forms");
         })
         .catch((err) => {
           alert(err);
@@ -56,19 +56,19 @@ const Signup = ({ signup }) => {
     dispatch(setErrors(""));
   };
   return (
-    <form className="login" onSubmit={handleSubmit}>
-      <div className="login__head">Signup Form</div>
-      {error && <div className="login__error">{error}</div>}
-      <div className="login__fields">
-        <div className="login__field">
+    <form className="form" onSubmit={handleSubmit}>
+      <div className="form__head">Signup Form</div>
+      {error && <div className="form__error">{error}</div>}
+      <div className="form__fields">
+        <div className="form__field">
           <label>First Name:</label>
           <input type="text" name="firstName" id="firstName"></input>
         </div>
-        <div className="login__field">
+        <div className="form__field">
           <label>Last Name:</label>
           <input type="text" name="lastName" id="lastName"></input>
         </div>
-        <div className="login__field">
+        <div className="form__field">
           <label>Email:</label>
           <input
             type="text"
@@ -78,11 +78,11 @@ const Signup = ({ signup }) => {
           ></input>
         </div>
 
-        <div className="login__field">
+        <div className="form__field">
           <label>Password:</label>
           <input type="text" name="password" id="password"></input>
         </div>
-        <div className="login__field">
+        <div className="form__field">
           <label>Confirm Password:</label>
           <input
             type="text"
@@ -90,11 +90,11 @@ const Signup = ({ signup }) => {
             id="conformPassword"
           ></input>
         </div>
-        <div className="login__btn">
-          <Button type="submit">Signup</Button>
+        <div className="form__btn">
+          <button type="submit">Signup</button>
         </div>
-        <div className="login__small">
-          Already a member? <a href="/signin">Login</a>
+        <div className="form__small">
+          Already a member? <a href="/forms">Login</a>
         </div>
       </div>
     </form>
