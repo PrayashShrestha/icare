@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import Button from "../Button/Button";
 import firebase from "firebase";
 import { useHistory } from "react-router";
 import "./Forms.css";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { auth, firestore } from "../../Firebase";
-import { setErrors, setUser } from "../../actions/Actions";
-import { isEmpty } from "react-redux-firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../Firebase";
+import { setErrors, setUser, setUserCategory } from "../../actions/Actions";
 
-const Signin = (props) => {
+const AdminSignin = (props) => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -23,6 +21,9 @@ const Signin = (props) => {
     e.preventDefault();
     if (!(emailRef.current.value && passwordRef.current.value)) {
       return dispatch(setErrors("Fields are empty"));
+    }
+    if (!(emailRef.current.value === "admin@gmail.com")) {
+      return dispatch(setErrors("Admin credintials didnt match"));
     }
     try {
       await auth
@@ -47,7 +48,7 @@ const Signin = (props) => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <div className="form__head">Login Form</div>
+      <div className="form__head">Admin Login Form</div>
       {err && <div className="form__error">{err}</div>}
       <div className="form__fields">
         <div className="form__field">
@@ -64,38 +65,11 @@ const Signin = (props) => {
           <input type="password" id="password" ref={passwordRef}></input>
         </div>
         <div className="form__btn">
-          <button>Login</button>
-        </div>
-        <div className="form__small">
-          Not a member yet? <a href="/signup">Signup</a>
-        </div>
-
-        {/* Google Signin */}
-        <div className="form__btn">
-          <button
-            onclick={(e) => {
-              e.preventDefault()
-              auth
-                .signInWithPopup(provider)
-                .then((result) => {
-                  auth.onAuthStateChanged(() => {
-                    dispatch(setUser(result.user.displayName));
-                  });
-                  history.push("/");
-                })
-                .catch((err) => {
-                  if (!err.a) {
-                    dispatch(setErrors("Login failed Please try again"));
-                  }
-                });
-            }}
-          >
-            Signin with Google
-          </button>
+          <button>Admin Login</button>
         </div>
       </div>
     </form>
   );
 };
 
-export default Signin;
+export default AdminSignin;

@@ -18,6 +18,11 @@ import { useEffect } from "react";
 import { auth } from "./Firebase";
 import Profile from "./components/Profile/Profile";
 import Forms from "./components/Forms/Forms";
+import AdminSignin from "./components/Forms/AdminSignin";
+import Users from "./components/Users/Users";
+import { useDispatch } from "react-redux";
+import { setUser, setUserCategory } from "./actions/Actions";
+import Doctors from "./components/Doctors/Doctors";
 
 function App() {
   // useEffect(() => {
@@ -29,23 +34,38 @@ function App() {
   //     }));
   //   });
   // });
-
+  const user = useSelector((state) => state.user);
+  console.log(user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      dispatch(
+        setUser(user.displayName, user.uid, user.email)
+      );
+      if (user.displayName === "admin") {
+        dispatch(setUserCategory("admin"));
+      }
+    })
+  }, [])
   return (
     <div className="app">
       <Router>
         <Navbar />
-        <Section />
+        {!user.category && <Section />}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/predict" component={Predict} />
           <Route path="/about" component={About} />
           <Route path="/consult" component={Consult} />
+          <Route path="/doctors" component={Doctors} />
+          <Route path="/users" component={Users} />
           <Route path="/contact" component={Contact} />
           <Route path="/forms" component={Forms} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
           <Route path="/details" component={DetailForm} />
+          <Route path="/admin-signin" component={AdminSignin} />
         </Switch>
       </Router>
       <MessageIcon />

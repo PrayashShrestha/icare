@@ -4,7 +4,7 @@ const initialState = {
   user: "",
   uid: "",
   email: "",
-  userCategory: "",
+  category: "",
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,9 +19,10 @@ export const userReducer = (state = initialState, action) => {
     case SET_USER_CATEGORY: {
       return {
         ...state,
-        userCategory: action.payload,
+        category: action.payload,
       };
     }
+
     default:
       return state;
   }

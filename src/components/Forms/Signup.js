@@ -2,11 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setErrors } from "../../actions/Actions";
-import { auth } from "../../Firebase";
-import Button from "../Button/Button";
 import "./Forms.css";
+import axios from "axios";
 
-const Signup = ({ signup }) => {
+const Signup = () => {
   // const [error, setError] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const Signup = ({ signup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, password, conformPassword } =
+    const { username, email, password, conformPassword } =
       e.target.elements;
 
     //check the datas in the user level
@@ -24,8 +23,7 @@ const Signup = ({ signup }) => {
       return dispatch(setErrors("Passwords didnot match"));
     } else if (
       !(
-        firstName.value &&
-        lastName &&
+        username.value &&
         email.value &&
         password.value &&
         conformPassword.value
@@ -36,37 +34,49 @@ const Signup = ({ signup }) => {
 
     //creating user in firebase
     try {
-      await auth
-        .createUserWithEmailAndPassword(email.value, password.value)
-        .then((result) => {
-          result.user.updateProfile({
-            displayName: `${firstName.value} ${lastName.value}`,
-          });
-          alert("success");
-          console.log(result.user);
+      const data = {
+        userName: username.value,
+        email: email.value,
+        password: password.value,
+      };
+      axios
+        .post("http://localhost:5000/api/add/patient", data)
+        .then((res) => {
+          alert(res.data.status);
           history.push("/forms");
         })
-        .catch((err) => {
-          alert(err);
+        .catch((e) => {
+          console.log(e);
+          alert(e);
         });
-    } catch {
+
+      // await auth
+      //   .createUserWithEmailAndPassword(email.value, password.value)
+      //   .then((result) => {
+      //     result.user.updateProfile({
+      //       displayName: `${firstName.value} ${lastName.value}`,
+      //     });
+      //     alert("success");
+
+      //     history.push("/forms");
+      //   })
+      //   .catch((err) => {
+      //     alert(err);
+      //   });
+    } catch (e) {
       alert("Signup Failed");
     }
-
     dispatch(setErrors(""));
   };
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <div className="form__head">Signup Form</div>
       {error && <div className="form__error">{error}</div>}
       <div className="form__fields">
         <div className="form__field">
-          <label>First Name:</label>
-          <input type="text" name="firstName" id="firstName"></input>
-        </div>
-        <div className="form__field">
-          <label>Last Name:</label>
-          <input type="text" name="lastName" id="lastName"></input>
+          <label>Username:</label>
+          <input type="text" name="username" id="username"></input>
         </div>
         <div className="form__field">
           <label>Email:</label>
@@ -77,7 +87,6 @@ const Signup = ({ signup }) => {
             id="email"
           ></input>
         </div>
-
         <div className="form__field">
           <label>Password:</label>
           <input type="text" name="password" id="password"></input>
@@ -94,7 +103,7 @@ const Signup = ({ signup }) => {
           <button type="submit">Signup</button>
         </div>
         <div className="form__small">
-          Already a member? <a href="/forms">Login</a>
+          Already a member? <a href="/signin">Login</a>
         </div>
       </div>
     </form>

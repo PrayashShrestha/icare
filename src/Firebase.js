@@ -1,6 +1,7 @@
 import firebase from "firebase"; //Core Firebase SDK, always import it
 import "firebase/auth"; //Firebase authentication service
 import "firebase/firestore";
+import 'firebase/storage'
 
 //firebase Configuration and its initialization
 const firebaseConfig = firebase.initializeApp({
@@ -15,6 +16,7 @@ const firebaseConfig = firebase.initializeApp({
 //references to cloud firestore and authentication service
 export const firestore = firebase.firestore();
 export const auth = firebaseConfig.auth();
+export const storage = firebase.storage()
 
 //exporting the firebase config
 export default firebaseConfig;

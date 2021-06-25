@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrors, setLoading } from "../../actions/Actions";
+import { setLoading } from "../../actions/Actions";
 import { firestore } from "../../Firebase";
 import { useHistory } from "react-router";
 
 const Profile = () => {
   const uid = useSelector((state) => state.user.uid);
-  const error = useSelector((state) => state.error.error);
-  const userCategory = useSelector((state) => state.user.userCategory);
   const loading = useSelector((state) => state.loading.loading);
 
   const dispatch = useDispatch();
@@ -18,11 +16,9 @@ const Profile = () => {
     const response = async () => {
       //
       //
-      const doc = await firestore.collection(userCategory).doc(`${uid}`).get();
+      const doc = await firestore.collection("patient").doc(`${uid}`).get();
 
-      if (!doc.exists) {
-        dispatch(setErrors("Error while loading data....."));
-      } else {
+      if (doc.exists) {
         setUserData(doc.data()); // retriving the fields of the data
         console.log(userData);
       }
@@ -35,8 +31,7 @@ const Profile = () => {
     <div className="profile">
       <div className="profile__container">
         <h1 className="profile__header">Profile</h1>
-        {error && <div>{error}</div>}
-        {!userData ? (
+        {!userData.photo || !userData.name ? (
           <div className="profile_notSet">You haven't set Your Profile Yet</div>
         ) : (
           <div className="profile__details">
@@ -68,7 +63,9 @@ const Profile = () => {
         )}
         <div className="profile__btns">
           <button onClick={() => history.push("/details")}>
-            {!userData ? "Add Details" : "Update Details"}
+            {!userData.photo || !userData.name
+              ? "Add Details"
+              : "Update Details"}
           </button>
         </div>
       </div>

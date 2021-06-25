@@ -23,7 +23,7 @@ const DetailForm = () => {
   const name = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
-  const checkLength = (e) => {};
+  const checkLength = (e) => { };
 
   const handleCamera = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const DetailForm = () => {
   };
 
   //useCallback hooks helps to set the value only when the parameter passed gets changed which avoids the rerendering of the component
-  //It is same like sueMemo but use memo returns only the value of the function but the callBack returns the entire function object
+  //It is same like useMemo but useMemo returns only the value of the function but the callBack returns the entire function object
   const capture = useCallback(
     (e) => {
       e.preventDefault();
@@ -43,14 +43,13 @@ const DetailForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { option, phone, address, date } = e.target.elements;
-    const collectionName = option.value === "patient" ? "patient" : "doctor";
+    const { phone, address, date } = e.target.elements;
     try {
-      await firestore.collection(collectionName).doc(uid).set({
+      await firestore.collection("patient").doc(uid).set({
         id: uid,
         createdAt: new Date(),
         name: name,
-        category: option.value,
+        category: "patient",
         email: email,
         phone: phone.value,
         address: address.value,
@@ -72,7 +71,7 @@ const DetailForm = () => {
         Thankyou for joining us (Prayash Shrestha), please fill out your
         details.
       </span>
-      <div className="detailForm__item">
+      {/* <div className="detailForm__item">
         <label htmlFor="selection">Select:</label>
         <select name="option" id="option" defaultChecked="patient">
           <option value="patient" id="patient">
@@ -82,7 +81,7 @@ const DetailForm = () => {
             Doctor
           </option>
         </select>
-      </div>
+      </div> */}
 
       <div className="detailForm__item">
         <label htmlFor="address" id="phone">
@@ -112,6 +111,7 @@ const DetailForm = () => {
           id="date"
           name="date"
           placeholder="Select Date"
+          min="2018-01-01"
           required
         />
       </div>

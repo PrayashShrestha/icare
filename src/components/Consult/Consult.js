@@ -3,18 +3,23 @@ import { firestore } from "../../Firebase";
 import ConsultantCard from "./ConsultantCard";
 
 const Consult = () => {
-  const [consultats, setConsultats] = useState([]);
+  const [consultants, setConsultants] = useState([]);
   useEffect(() => {
     const respose = async () => {
-      const doc = await firestore.collection("doctor").get();
-      doc.docs.map((all) => setConsultats([all.data()]));
+      const doc = await firestore
+        .collection("doctor")
+        .onSnapshot((snapshot) => {
+          setConsultants(snapshot.docs.map((doc) => doc.data()));
+        });
+
+      // doc.docs.map((all) => setConsultats([...consultats, [all.data()]]));
     };
     respose();
-    console.log(consultats);
+    console.log(consultants);
   }, []);
   return (
     <div className="consult">
-      {consultats.map((consultant, index) => (
+      {consultants.map((consultant, index) => (
         <ConsultantCard consultats={consultant} key={index} />
       ))}
     </div>

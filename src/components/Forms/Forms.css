@@ -38,6 +38,7 @@
   font-family: "Pattaya", sans-serif;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .form__head {

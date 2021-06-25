@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { setUserCategory } from "../../actions/Actions";
 import { auth } from "../../Firebase";
 import "./Navbar.css";
 
@@ -12,6 +13,8 @@ const Navbar = () => {
   const [option, handleShowOption] = useState(false);
 
   const user = useSelector((state) => state.user.user);
+  const category = useSelector((state) => state.user.category);
+  const dispatch = useDispatch();
 
   //Menu Button Setting with resize
   const showButton = () => {
@@ -74,33 +77,58 @@ const Navbar = () => {
             Home
           </Link>
         </li>
+        {!category && (
+          <li className="nav__item">
+            <Link
+              to="/about"
+              style={{ textDecoration: "none", color: "aliceblue" }}
+              onClick={closeNav}
+            >
+              About I-care
+            </Link>
+          </li>
+        )}
         <li className="nav__item">
-          <Link
-            to="/about"
-            style={{ textDecoration: "none", color: "aliceblue" }}
-            onClick={closeNav}
-          >
-            About I-care
-          </Link>
+          {category ? (
+            <Link
+              to="/doctors"
+              style={{ textDecoration: "none", color: "aliceblue" }}
+              onClick={closeNav}
+            >
+              Doctors
+            </Link>
+          ) : (
+            <Link
+              to="/consult"
+              style={{ textDecoration: "none", color: "aliceblue" }}
+              onClick={closeNav}
+            >
+              Consult Doctor
+            </Link>
+          )}
         </li>
-        <li className="nav__item">
-          <Link
-            to="/consult"
-            style={{ textDecoration: "none", color: "aliceblue" }}
-            onClick={closeNav}
-          >
-            Consult Doctor
-          </Link>
-        </li>
-        <li className="nav__item">
-          <Link
-            to="/contact"
-            style={{ textDecoration: "none", color: "aliceblue" }}
-            onClick={closeNav}
-          >
-            Contact
-          </Link>
-        </li>
+        {category && (
+          <li className="nav__item">
+            <Link
+              to="/users"
+              style={{ textDecoration: "none", color: "aliceblue" }}
+              onClick={closeNav}
+            >
+              Users
+            </Link>
+          </li>
+        )}
+        {!category && (
+          <li className="nav__item">
+            <Link
+              to="/contact"
+              style={{ textDecoration: "none", color: "aliceblue" }}
+              onClick={closeNav}
+            >
+              Contact
+            </Link>
+          </li>
+        )}
         <li className="nav__item-logging">
           {logged ? (
             <button
@@ -121,7 +149,7 @@ const Navbar = () => {
           )}
         </li>
         {/* Only show when user is in mobile view and is logged in */}
-        {logged && option && (
+        {logged && option && !category && (
           <li className="nav__item-mobile">
             <p
               onClick={() => {
@@ -139,6 +167,7 @@ const Navbar = () => {
               onClick={() => {
                 auth.signOut();
                 setLogged("");
+                dispatch(setUserCategory(""));
                 history.push("/");
                 history.go(0); //reload the page
                 setClick(false); //close the nav in mobile view
@@ -155,18 +184,21 @@ const Navbar = () => {
         <div className="navItem__options">
           {/* after onclick we need to make dissapear the option so we set it back to false
           but we donot do it in logout coz after logout we have set the options to display none when logged is false */}
-          <p
-            onClick={() => {
-              handleShowOption(false);
-              history.push("/profile");
-            }}
-          >
-            Profile
-          </p>
+          {!category && (
+            <p
+              onClick={() => {
+                handleShowOption(false);
+                history.push("/profile");
+              }}
+            >
+              Profile
+            </p>
+          )}
           <p
             onClick={() => {
               auth.signOut();
               setLogged("");
+              dispatch(setUserCategory(""));
               history.push("/");
               history.go(0); //reload the page
               setClick(false); //close the nav in mobile view
