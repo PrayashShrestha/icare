@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { setUserCategory } from "../../actions/Actions";
 import { auth } from "../../Firebase";
 import "./Navbar.css";
@@ -69,13 +69,14 @@ const Navbar = () => {
       {/* nav-Items */}
       <ul className={click ? "nav__items active" : "nav__items "}>
         <li className="nav__item">
-          <Link
+          <NavLink
             to="/"
             style={{ textDecoration: "none", color: "aliceblue" }}
             onClick={closeNav}
+
           >
             Home
-          </Link>
+          </NavLink>
         </li>
         {!category && (
           <li className="nav__item">
@@ -83,6 +84,7 @@ const Navbar = () => {
               to="/about"
               style={{ textDecoration: "none", color: "aliceblue" }}
               onClick={closeNav}
+
             >
               About I-care
             </Link>

@@ -74,7 +74,7 @@ const Signin = (props) => {
         <div className="form__btn">
           <button
             onclick={(e) => {
-              e.preventDefault()
+              e.preventDefault();
               auth
                 .signInWithPopup(provider)
                 .then((result) => {

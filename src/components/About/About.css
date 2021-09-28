@@ -1,0 +1,16 @@
+.about {
+  text-align: center;
+}
+.about > h1 {
+  font-size: 40px;
+  font-weight: 550;
+  font-family: "Pattaya", sans-serif;
+  margin-top: 30px;
+  border-bottom: 3px #000;
+}
+.about_section > p {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(206, 40, 104);
+}

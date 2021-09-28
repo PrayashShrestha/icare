@@ -1,5 +1,6 @@
 import { Modal } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import { auth, firestore } from "../../Firebase";
 import DoctorForm from "./DoctorForm";
 import "./Doctors.css";
@@ -11,6 +12,7 @@ const Doctors = () => {
   const [open, setOpen] = useState(false)
   const [edit, setEdit] = useState(false)
   const [doctorData, setDoctorData] = useState()
+  const searchRef = useRef()
 
   const handleOpen = () => {
     setOpen(true)
@@ -32,6 +34,14 @@ const Doctors = () => {
     })
   }
 
+  const handleChange = async () => {
+    await firestore.collection("doctor").startAt(searchRef.current.value).onSnapshot((snapshot) => {
+      setDoctors(snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data()
+      })));
+    });
+  }
   useEffect(() => {
     const fetch = async () => {
       await firestore.collection("doctor").onSnapshot((snapshot) => {
@@ -52,6 +62,7 @@ const Doctors = () => {
       <h1 className="doctorList__head">Doctors List</h1>
       <div className="doctors__add">
         <button className="add-btn" onClick={handleOpen}>Add New Doctor</button>
+        <input placeholder="Search" onChange={handleChange} ref={searchRef} />
       </div>
       <table>
         <tbody>

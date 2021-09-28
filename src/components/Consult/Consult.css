@@ -7,10 +7,11 @@
   display: flex;
   flex-direction: column;
   width: 350px;
-  height: max-content;
+  height: 220px;
   border: none;
   border-radius: 10px;
-  padding: 2% 1%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -24,7 +25,8 @@
 }
 .consult__items {
   display: grid;
-  grid-template-columns: 1.3fr 4.5fr;
+  /* grid-template-columns: 1.3fr 4.5fr; */
+  place-items: center;
 }
 .consult__img {
   width: 50px;
@@ -40,6 +42,9 @@
   width: 100%;
   height: 100%;
 }
+.consult__detail {
+  margin-top: 15px;
+}
 .consult__detail > div {
   cursor: context-menu;
   display: grid;
@@ -47,10 +52,27 @@
 }
 .consult__detail > div > span {
   color: #575151;
+  font-weight: 500;
+  font-size: 18px;
+}
+.consult__detail > div > small {
+  padding-bottom: 0px;
+  align-items: center;
 }
 .consult__btn {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 24px;
+}
+.consult__btn > button {
+  background-color: rgba(0, 128, 128, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  width: 80%;
 }
 
 @media only screen and (max-width: 1500px) {

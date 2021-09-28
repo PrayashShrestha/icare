@@ -1,17 +1,53 @@
 .predict {
-  background-color: bisque;
+  background-color: rgb(255, 236, 212);
   padding-bottom: 50px;
   padding-top: 20px;
 }
 .predict__form {
-  place-items: center;
-  height: 100%;
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-gap: 20px !important;
+  place-items: center;
+  /* grid-template-columns: 2fr 1fr; */
+  /* grid-template-rows: repeat(2, 1fr); */
   padding: 3% 0px;
+  text-align: center;
 }
+.predict_form_fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px !important;
+}
+.form_fields {
+  display: grid;
+  place-items: center;
+  grid-gap: 7px !important;
+  background-color: rgb(223, 191, 153);
+  height: max-content;
+  width: 300px;
+  padding: 30px;
+  border-radius: 20px;
+}
+.form_fields > label {
+  font-size: 20px;
+  font-weight: 550;
+  font-family: "Pattaya", sans-serif;
+}
+.inp {
+  padding: 5px;
+  text-align: center;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 150px;
+  height: 30px;
+}
+/* to disble the number arrows */
+input::-webkit-inner-spin-button {
+  opacity: 0;
+  display: none;
+}
+
 .predict__mssg {
   margin-top: 4%;
   text-align: center;
@@ -21,22 +57,37 @@
 }
 .predict__result {
   border: 1px solid black;
-  padding: 10px;
-  width: 250px;
-  height: 80px;
+  padding: 20px;
+  width: 280px;
+  height: 120px;
   color: #008080;
   background-color: rgb(199, 199, 199);
+  border: none;
 }
 .predict__result > h3 {
   color: red;
 }
-.predict__btns {
+.predict__container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px !important;
+  margin-top: 3%;
 }
-
+.predict__btns {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+@media only screen and (max-width: 1000px) {
+  .predict_form_fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media only screen and (max-width: 850px) {
+  .predict_form_fields {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
   .predict__form {
     display: grid;
     grid-template-columns: repeat(1, 1fr);

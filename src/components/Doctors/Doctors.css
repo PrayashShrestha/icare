@@ -1,4 +1,7 @@
 .doctorList {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  margin-top: 0px;
 }
 .doctorList__head {
   text-align: center;
@@ -31,4 +34,14 @@ td {
   padding: 10px;
   font-size: 17px;
   font-weight: 600;
+}
+.doctors__add > input {
+  height: 30px;
+  margin-left: 40px;
+  border-radius: 50px;
+  outline: none;
+  padding: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border: 1px solid rgba(0, 128, 128, 0.9);
 }
