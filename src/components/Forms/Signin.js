@@ -31,7 +31,10 @@ const Signin = (props) => {
           passwordRef.current.value
         )
         .then((result) => {
-          console.log(result);
+          if (!result.user.emailVerified) {
+            auth.currentUser.sendEmailVerification();
+          }
+          console.log(result.user.emailVerified);
           history.push("/");
         })
         .catch((err) => {
@@ -40,9 +43,12 @@ const Signin = (props) => {
           }
           dispatch(setErrors(err.code));
         });
+
+      // await auth.currentUser.sendEmailVerification()
     } catch {
       dispatch(setErrors("Login failed please try again"));
     }
+
   };
 
   return (
@@ -68,6 +74,9 @@ const Signin = (props) => {
         </div>
         <div className="form__small">
           Not a member yet? <a href="/signup">Signup</a>
+        </div>
+        <div className="form__small">
+          <small ><a href="/forget-password" className="form__forgotPassword">forgot password</a> </small>
         </div>
 
         {/* Google Signin */}

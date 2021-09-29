@@ -23,6 +23,7 @@ import Users from "./components/Users/Users";
 import { useDispatch } from "react-redux";
 import { setUser, setUserCategory } from "./actions/Actions";
 import Doctors from "./components/Doctors/Doctors";
+import Forget from "./components/Forms/Forget";
 
 function App() {
   // useEffect(() => {
@@ -40,13 +41,13 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       dispatch(
-        setUser(user.displayName, user.uid, user.email)
+        setUser(user.displayName, user.uid, user.email, user.emailVerified)
       );
       if (user.displayName === "admin") {
         dispatch(setUserCategory("admin"));
       }
-    })
-  }, [])
+    });
+  }, []);
   return (
     <div className="app">
       <Router>
@@ -63,8 +64,9 @@ function App() {
           <Route path="/forms" component={Forms} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
-          <Route path="/profile" component={Profile} />
+          <Route path={`/profile`} component={Profile} />
           <Route path="/details" component={DetailForm} />
+          <Route path="/forget-password" component={Forget} />
           <Route path="/admin-signin" component={AdminSignin} />
         </Switch>
       </Router>

@@ -72,7 +72,7 @@
 
 .form__btn {
   width: 100%;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 .form__btn > button {
   width: 100%;
@@ -98,6 +98,9 @@
 .form__small {
   margin-top: 10px;
   text-align: center;
+}
+.form__forgotPassword {
+  color: red;
 }
 @media only screen and (max-width: 992px) {
   .login {

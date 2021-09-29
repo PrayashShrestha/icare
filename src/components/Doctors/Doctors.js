@@ -9,30 +9,31 @@ import EditDoctor from "./EditDoctor";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
-  const [open, setOpen] = useState(false)
-  const [edit, setEdit] = useState(false)
-  const [doctorData, setDoctorData] = useState()
-  const searchRef = useRef()
+  const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [doctorData, setDoctorData] = useState("");
+  const [filteredDoctor, setFilteredDoctor] = useState([]);
+  const searchRef = useRef();
 
   const handleOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-    setEdit(false)
-  }
+    setOpen(false);
+    setEdit(false);
+  };
 
   const handleEdit = (editDoctor) => {
-    setDoctorData(editDoctor)
-    setEdit(true)
+    setDoctorData(editDoctor);
+    setEdit(true);
 
-  }
+  };
   const removeDoctor = async (e, id) => {
-    e.preventDefault()
+    e.preventDefault();
     firestore.collection("doctor").doc(id).delete().then(() => {
-      alert("Deleted Successfully")
-    })
-  }
+      alert("Deleted Successfully");
+    });
+  };
 
   const handleChange = async () => {
     await firestore.collection("doctor").startAt(searchRef.current.value).onSnapshot((snapshot) => {
@@ -41,7 +42,7 @@ const Doctors = () => {
         data: doc.data()
       })));
     });
-  }
+  };
   useEffect(() => {
     const fetch = async () => {
       await firestore.collection("doctor").onSnapshot((snapshot) => {

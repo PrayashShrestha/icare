@@ -8,10 +8,10 @@ export const setErrors = (error) => ({
 });
 
 //Set the name of the user from the firebase to the UI
-export const setUser = (user, uid, email) => async (dispatch) =>
+export const setUser = (user, uid, email, emailVerified) => async (dispatch) =>
   dispatch({
     type: types.SET_USER,
-    payload: { user: user, uid: uid, email: email },
+    payload: { user: user, uid: uid, email: email, emailVerified: emailVerified },
   });
 auth.onAuthStateChanged((userAuth) => {
   return;

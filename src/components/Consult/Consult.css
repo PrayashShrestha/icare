@@ -1,3 +1,30 @@
+.consult__container {
+  text-align: center;
+  margin-top: 40px;
+}
+.consult__msg {
+  font-size: 30px;
+  color: rgb(226, 10, 10);
+  font-weight: 600;
+  background-color: rgb(207, 205, 205);
+  width: fit-content;
+  margin: auto;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 20px;
+}
+.consult__msg > a {
+  color: rgb(226, 10, 10);
+}
+.consult__inp > input {
+  outline: none;
+  border: none;
+  height: 40px;
+  background-color: #ffcd9f;
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+}
 .consult {
   position: relative;
   display: grid;
@@ -7,11 +34,10 @@
   display: flex;
   flex-direction: column;
   width: 350px;
-  height: 220px;
+  height: 250px;
   border: none;
   border-radius: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 20px;
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -37,6 +63,7 @@
   display: flex;
   text-align: center;
   align-items: center;
+  background-color: #ffcd9f;
 }
 .consult__img > img {
   width: 100%;
@@ -47,13 +74,16 @@
 }
 .consult__detail > div {
   cursor: context-menu;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
+  /* grid-template-columns: 1fr 3fr; */
+  flex-direction: row;
+  margin-bottom: 10px;
 }
 .consult__detail > div > span {
   color: #575151;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
+  width: 100px;
 }
 .consult__detail > div > small {
   padding-bottom: 0px;

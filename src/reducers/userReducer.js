@@ -4,6 +4,7 @@ const initialState = {
   user: "",
   uid: "",
   email: "",
+  emailVerified: "",
   category: "",
 };
 export const userReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ export const userReducer = (state = initialState, action) => {
         user: action.payload.user,
         uid: action.payload.uid,
         email: action.payload.email,
+        emailVerified: action.payload.emailVerified
       };
     }
     case SET_USER_CATEGORY: {

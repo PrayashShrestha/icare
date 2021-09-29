@@ -3,9 +3,7 @@ import "./Contact.css";
 import emailjs from "emailjs-com";
 
 const Contact = () => {
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const messageRef = useRef(null);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,15 +23,15 @@ const Contact = () => {
         <div className="contact__body">
           <div className="contact__item">
             <label htmlFor="name">Name: </label>
-            <input type="text" ref={nameRef} name="name" />
+            <input type="text" name="name" />
           </div>
           <div className="contact__item">
             <label htmlFor="name">Email: </label>
-            <input type="text" ref={emailRef} name="email" />
+            <input type="text" name="email" />
           </div>
           <div className="contact__item">
             <label htmlFor="name">Message: </label>
-            <textarea type="text" ref={messageRef} name="message" />
+            <textarea type="text" name="message" />
           </div>
           <div className="contact_btn">
             <button type="submit">Send</button>

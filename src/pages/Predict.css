@@ -64,8 +64,15 @@ input::-webkit-inner-spin-button {
   background-color: rgb(199, 199, 199);
   border: none;
 }
+
 .predict__result > h3 {
   color: red;
+}
+.predict__result > a {
+  padding: 5px;
+  font-weight: 700;
+  font-size: 18px;
+  color: black;
 }
 .predict__container {
   display: grid;

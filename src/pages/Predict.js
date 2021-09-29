@@ -4,6 +4,7 @@ import Fields from "../components/Fields/Fields";
 
 import Button from "../components/Button/Button";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Predict = () => {
   const fields = [
@@ -21,6 +22,10 @@ const Predict = () => {
   const [result, setResult] = useState("Set the values and click predict.");
 
   const [values, setValues] = useState([]);
+  const [consultRoute, setConsultRoute] = useState("");
+
+  const user = useSelector((state) => state.user.user);
+  const verified = useSelector((state) => state.user.emailVerified);
 
 
   //form an array of the input values with the key values in the map function
@@ -67,13 +72,15 @@ const Predict = () => {
     }
 
     try {
-      axios.post("http://192.168.1.30:80/predict", inputs).then((res) => {
+      axios.post("http://192.168.1.12:80/predict", inputs).then((res) => {
         console.log(typeof (res.data.result));
         if (res.data.result === 1) {
           setResult("Your have *Breast Cancer*. Please consult with a doctor.");
+          setConsultRoute("1");
         }
         else {
           setResult("Your don't have *Breast Cancer*.");
+          setConsultRoute("");
         }
 
       })
@@ -88,47 +95,50 @@ const Predict = () => {
     // setResult("Predicting system is still under work");
   };
   return (
-    <div className="predict">
-      <div className="predict__mssg">
-        Please fill the inputs with the <br />
-        appropriate data provided by the doctor.
-      </div>
+    <div>
+      {verified ? (<div className="predict">
+        <div className="predict__mssg">
+          Please fill the inputs with the <br />
+          appropriate data provided by the doctor.
+        </div>
 
-      {/* <Prompt /> */}
-      <form className="predict__form" method="POST" onSubmit={handlePredict}>
-        <div className="predict_form_fields">
-          {fields.map((field, indx) => (
-            <div className="form_fields">
-              <label >{field.title}</label>
-              <input
-                id={field.title}
-                className="inp"
-                type="number"
-                placeholder={field.range}
-                value={values[indx] ? values[indx] : ""}
-                onChange={(e) => updateValue(e.target.value, indx)}
-              />
+        {/* <Prompt /> */}
+        <form className="predict__form" method="POST" onSubmit={handlePredict}>
+          <div className="predict_form_fields">
+            {fields.map((field, indx) => (
+              <div className="form_fields">
+                <label >{field.title}</label>
+                <input
+                  id={field.title}
+                  className="inp"
+                  type="number"
+                  placeholder={field.range}
+                  value={values[indx] ? values[indx] : ""}
+                  onChange={(e) => updateValue(e.target.value, indx)}
+                />
+              </div>
+              // <Fields
+              //   field={field}
+              //   key={id}
+              //   id={id}
+              //   value={values[id] ? values[id] : ""}
+              //   updateValue={updateValue}
+              // />
+            ))}
+          </div>
+
+          <div className="predict__container">
+            <div className="predict__result">
+              <h3>Result:</h3> {result} <br /> {consultRoute ? (<a href="/consult">Doctor List</a>) : ""}
             </div>
-            // <Fields
-            //   field={field}
-            //   key={id}
-            //   id={id}
-            //   value={values[id] ? values[id] : ""}
-            //   updateValue={updateValue}
-            // />
-          ))}
-        </div>
-
-        <div className="predict__container">
-          <div className="predict__result">
-            <h3>Result:</h3> {result}
+            <div className="predict__btns">
+              <Button onclick={handleReset}>Reset All</Button>
+              <Button type="submit" >Predict</Button>
+            </div>
           </div>
-          <div className="predict__btns">
-            <Button onclick={handleReset}>Reset All</Button>
-            <Button type="submit" >Predict</Button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>) :
+        user ? (<div className="consult__msg">Please Verify your Email.Verification Email has been sent to you.</div>) : (<div className="consult__msg">Please <a href="/signin">Signin</a> first to predict.</div>)}
     </div>
   );
 };

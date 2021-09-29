@@ -36,6 +36,9 @@ const Signup = () => {
     ) {
       return dispatch(setErrors("Fields are empty"));
     }
+    else if (password.value.length <= 6) {
+      return dispatch(setErrors("Password must be greater than 6 characters."));
+    }
 
     //creating user in firebase
     try {
@@ -113,7 +116,7 @@ const Signup = () => {
         </div>
         <div className="form__field">
           <label>Password:</label>
-          <input type="text" name="password" id="password" onChange={handlePasswordStrength} >
+          <input type="password" name="password" id="password" onChange={handlePasswordStrength} >
 
           </input>
           <small style={{ color: textColor, textAlign: "center" }}>{msg}</small>
@@ -121,7 +124,7 @@ const Signup = () => {
         <div className="form__field">
           <label>Confirm Password:</label>
           <input
-            type="text"
+            type="password"
             name="conformPassword"
             id="conformPassword"
           ></input>

@@ -8,6 +8,8 @@ import { useHistory } from "react-router";
 const Profile = () => {
   const uid = useSelector((state) => state.user.uid);
   const loading = useSelector((state) => state.loading.loading);
+  const user = useSelector((state) => state.user.user);
+  const verified = useSelector((state) => state.user.emailVerified);
 
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
@@ -31,8 +33,9 @@ const Profile = () => {
     <div className="profile">
       <div className="profile__container">
         <h1 className="profile__header">Profile</h1>
+        {verified ? (<small className="verified">Email Verified</small>) : (<small className="notVerified">Email Not Verified. Please verify your email to add details.</small>)}
         {!userData.photo || !userData.name ? (
-          <div className="profile_notSet">You haven't set Your Profile Yet</div>
+          verified && <div className="profile_notSet">You haven't set Your Profile Yet</div>
         ) : (
           <div className="profile__details">
             <div className="profile__item">
@@ -62,11 +65,11 @@ const Profile = () => {
           </div>
         )}
         <div className="profile__btns">
-          <button onClick={() => history.push("/details")}>
+          {verified && <button onClick={() => history.push("/details")} >
             {!userData.photo || !userData.name
               ? "Add Details"
               : "Update Details"}
-          </button>
+          </button>}
         </div>
       </div>
     </div>

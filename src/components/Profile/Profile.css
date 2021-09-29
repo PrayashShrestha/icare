@@ -64,3 +64,11 @@
   box-shadow: -2px 1px 7px 0px rgb(83, 81, 81);
   color: #fff;
 }
+.verified {
+  color: green;
+  font-weight: 700;
+}
+.notVerified {
+  color: red;
+  font-weight: 700;
+}

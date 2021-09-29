@@ -1,25 +1,25 @@
-import React, { useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { firestore, storage } from '../../Firebase'
+import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { firestore, storage } from '../../Firebase';
 
 const EditDoctor = ({ doctor }) => {
-    const { name, email, phone, working, speciality, photo } = doctor.data
-    const nameRef = useRef(name)
-    const emailRef = useRef(email)
-    const phoneRef = useRef(phone)
-    const workingRef = useRef(working)
-    const specialityRef = useRef(speciality)
-    const history = useHistory()
-    const [file, setFile] = useState(photo)
+    const { name, email, phone, working, speciality, photo } = doctor.data;
+    const nameRef = useRef(name);
+    const emailRef = useRef(email);
+    const phoneRef = useRef(phone);
+    const workingRef = useRef(working);
+    const specialityRef = useRef(speciality);
+    const history = useHistory();
+    const [file, setFile] = useState(photo);
     const handleFileChange = (e) => {
-        setFile(e.target.files[0])
-    }
+        setFile(e.target.files[0]);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatePhoto = await storage.ref(`images/doctors/${file.name}`).put(file).then(snapshot => {
-            return snapshot.ref.getDownloadURL()
-        })
+            return snapshot.ref.getDownloadURL();
+        });
 
         const data = {
             id: doctor.id,
@@ -29,13 +29,15 @@ const EditDoctor = ({ doctor }) => {
             working: workingRef.current.value ? workingRef.current.value : working,
             speciality: specialityRef.current.value ? specialityRef.current.value : speciality,
             photo: updatePhoto ? updatePhoto : file
-        }
+        };
 
         firestore.collection('doctor').doc(doctor.id).update(data).then(() => {
-            alert('Successfully Edited')
-            // history.go(0)
-        })
-    }
+
+            alert('Successfully Edited');
+            window.location.reload();
+
+        });
+    };
 
     return (
         <div className='doctorForm' >
@@ -72,6 +74,6 @@ const EditDoctor = ({ doctor }) => {
                 <button>Update</button>
             </form>
         </div>
-    )
-}
-export default EditDoctor
+    );
+};
+export default EditDoctor;
